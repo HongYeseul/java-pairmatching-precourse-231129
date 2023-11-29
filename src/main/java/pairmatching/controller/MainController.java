@@ -87,17 +87,11 @@ public class MainController {
     }
 
     private void showHistory(MatchingResult matchingResult) {
-        while (true) {
-            try {
-                if (matchingResult == null) {
-                    throw new IllegalArgumentException("[ERROR] 매칭 이력이 없습니다.");
-                }
-                showMatchingTeam(matchingResult);
-                break;
-            } catch (IllegalArgumentException e) {
-                Printer.printErrorMessage(e.getMessage());
-            }
+        if (matchingResult == null) {
+            System.out.println("[ERROR] 매칭 이력이 없습니다.");
+            return;
         }
+        showMatchingTeam(matchingResult);
     }
 
     private void showMatchingTeam(MatchingResult makedTeam) {
