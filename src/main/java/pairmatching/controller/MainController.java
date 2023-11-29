@@ -34,8 +34,23 @@ public class MainController {
 
         if (functionType.equals(FunctionType.FAIR_MATCHING)) {
             String courseAndMission = inputView.askCourseAndMission();
-            FairMatching.run(courseAndMission, frontendCrew, backendCrew);
+            List<List<String>> makedTeam = FairMatching.run(courseAndMission, frontendCrew, backendCrew);
+            showMatchingTeam(makedTeam);
         }
+    }
+
+    private void showMatchingTeam(List<List<String>> makedTeam) {
+        StringBuilder makeOutput = new StringBuilder();
+        for (int i = 0; i < makedTeam.size(); i++) {
+            for (int j = 0; j < makedTeam.get(i).size(); j++) {
+                makeOutput.append(makedTeam.get(i).get(j));
+                if (j != makedTeam.get(i).size()-1) {
+                    makeOutput.append(" : ");
+                }
+            }
+            makeOutput.append("\n");
+        }
+        outputView.showMatchingTeam(makeOutput.toString());
     }
 
     private String askFunction() {

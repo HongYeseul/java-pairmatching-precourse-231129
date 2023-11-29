@@ -1,5 +1,7 @@
 package pairmatching.model.result;
 
+import java.util.Arrays;
+
 public enum Mission {
     RACING_CAR(Level.LEVEL1, "자동차경주"),
     LOTTO(Level.LEVEL1, "로또"),
@@ -16,5 +18,14 @@ public enum Mission {
     Mission(Level level, String name) {
         this.level = level;
         this.name = name;
+    }
+
+    public static Mission findByName(String name) {
+        for (Mission mission: Mission.values()) {
+            if (mission.name.equals(name)) {
+                return mission;
+            }
+        }
+        throw new IllegalArgumentException("없는 미션 입니다.");
     }
 }
