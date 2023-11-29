@@ -14,6 +14,7 @@ import java.util.function.Supplier;
 public class MainController {
     private final InputView inputView;
     private final OutputView outputView;
+    MatchingResult matchingResult;
 
     public MainController(
             final InputView inputView,
@@ -33,11 +34,25 @@ public class MainController {
         List<String> frontendCrew = fileInput.makeFrontCrew();
         List<String> backendCrew = fileInput.makeBackendCrew();
 
-        if (functionType.equals(FunctionType.FAIR_MATCHING)) {
-            String courseAndMission = inputView.askCourseAndMission();
-            MatchingResult makedTeam = FairMatching.run(courseAndMission, frontendCrew, backendCrew);
-            showMatchingTeam(makedTeam);
+        while (!functionType.equals(FunctionType.QUIT)) {
+            if (functionType.equals(FunctionType.FAIR_MATCHING)) {
+                String courseAndMission = inputView.askCourseAndMission();
+                matchingResult = FairMatching.run(courseAndMission, frontendCrew, backendCrew);
+                showMatchingTeam(matchingResult);
+            }
+            if (functionType.equals(FunctionType.SHOW_FAIR)) {
+                if (matchingResult == null) {
+                    throw new IllegalArgumentException("[ERROR] 매칭 이력이 없습니다.");
+                }
+                showMatchingTeam(matchingResult);
+            }
+            if (functionType.equals(FunctionType.INIT_FAIR)) {
+                matchingResult = null;
+            }
+            functionNumber = askFunction();
+            functionType = function.makeFunctionType(functionNumber);
         }
+
     }
 
     private void showMatchingTeam(MatchingResult makedTeam) {
