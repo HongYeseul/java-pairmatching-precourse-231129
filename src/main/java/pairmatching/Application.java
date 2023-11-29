@@ -1,6 +1,7 @@
 package pairmatching;
 
 import pairmatching.controller.MainController;
+import pairmatching.model.crew.FileInput;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
 

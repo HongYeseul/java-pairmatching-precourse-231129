@@ -1,5 +1,6 @@
 package pairmatching.controller;
 
+import pairmatching.model.function.Function;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
 
@@ -18,11 +19,13 @@ public class MainController {
     }
 
     public void run() {
-        // TODO: 구현
+        String functionNumber = askFunction();
+        Function function = new Function();
+        function.run(functionNumber);
     }
 
-    private void askXXX() {
-
+    private String askFunction() {
+        return inputView.askFunction();
     }
 
     private void showXXX() {

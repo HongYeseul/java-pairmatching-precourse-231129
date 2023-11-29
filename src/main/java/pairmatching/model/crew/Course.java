@@ -1,4 +1,4 @@
-package pairmatching.model;
+package pairmatching.model.crew;
 
 public enum Course {
     BACKEND("백엔드"),
