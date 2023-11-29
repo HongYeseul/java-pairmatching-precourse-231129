@@ -15,12 +15,12 @@ public class FairMatching {
 
         if (Course.BACKEND.getName().equals(input[0])) {
             makedTeam = makeRandomTeam(backendCrew);
-            return new MatchingResult(Course.BACKEND, Mission.findByName(input[3]), makedTeam);
+            return new MatchingResult(Course.BACKEND, Mission.findByName(input[2]), makedTeam);
         }
 
         if (Course.FRONTEND.getName().equals(input[0])) {
             makedTeam = makeRandomTeam(frontendCrew);
-            return new MatchingResult(Course.FRONTEND, Mission.findByName(input[3]), makedTeam);
+            return new MatchingResult(Course.FRONTEND, Mission.findByName(input[2]), makedTeam);
         }
         throw new IllegalArgumentException("잘못된 입력입니다.");
     }
