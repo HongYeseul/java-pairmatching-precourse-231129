@@ -37,8 +37,14 @@ public class MainController {
 
         while (!functionType.equals(FunctionType.QUIT)) {
             if (functionType.equals(FunctionType.FAIR_MATCHING)) {
-                matchingResult = runFairMatching(frontendCrew, backendCrew);;
-                showMatchingTeam(matchingResult);
+                boolean retryFlag = true;
+                if (matchingResult != null) {
+                    retryFlag = askRetry();
+                }
+                if (retryFlag) {
+                    matchingResult = runFairMatching(frontendCrew, backendCrew);
+                    showMatchingTeam(matchingResult);
+                }
             }
             if (functionType.equals(FunctionType.SHOW_FAIR)) {
                 showHistory(matchingResult);
@@ -50,6 +56,23 @@ public class MainController {
             functionType = function.makeFunctionType(functionNumber);
         }
 
+    }
+
+    private boolean askRetry() {
+        while (true) {
+            try {
+                String yesOrNo = inputView.askRetry();
+                if (yesOrNo == "네") {
+                    return true;
+                }
+                if (yesOrNo == "아니오") {
+                    return false;
+                }
+                throw new IllegalArgumentException("잘못된 입력입니다.");
+            } catch (IllegalArgumentException e) {
+                Printer.printErrorMessage(e.getMessage());
+            }
+        }
     }
 
     private MatchingResult runFairMatching(List<String> frontendCrew, List<String> backendCrew) {
