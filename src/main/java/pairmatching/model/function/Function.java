@@ -16,10 +16,9 @@ public class Function {
 
         FileInput fileInput = new FileInput();
         int selection = Integer.parseInt(functionNumber);
-        frontendCrew = fileInput.makeFrontMember();
-        for (int i = 0; i < frontendCrew.size(); i++) {
-            System.out.println(frontendCrew.get(i).CourseAndName());
-        }
+        frontendCrew = fileInput.makeFrontCrew();
+        backendCrew = fileInput.makeBackendCrew();
+
         if (selection == 1) {
             // 페어매칭`
         }
