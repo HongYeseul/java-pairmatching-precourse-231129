@@ -1,17 +1,19 @@
 package pairmatching.model.crew;
 
+import pairmatching.model.result.Course;
+
 import java.util.List;
 
 public class Crew {
     private Course course;
-    private String name;
+    private java.lang.String name;
 
-    public Crew(Course course, String name) {
+    public Crew(Course course, java.lang.String name) {
         this.course = course;
         this.name = name;
     }
 
-    public String CourseAndName() {
+    public java.lang.String CourseAndName() {
         return course.name() + " 코스 " + name;
     }
 

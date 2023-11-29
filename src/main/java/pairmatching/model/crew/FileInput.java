@@ -8,16 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileInput {
-    public List<Crew> makeFrontCrew() {
+    public List<String> makeFrontCrew() {
         FileReader fileReader;
-        List<Crew> crew = new ArrayList<>();
+        List<String> crew = new ArrayList<>();
         try{
             File file = new File("/Users/macbookpro/Desktop/YS/우테코준비/java-pairmatching-precourse/src/main/resources/frontend-crew.md");
             FileReader fileReaderFront = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReaderFront);
             String member = "";
             while(( member = bufferedReader.readLine()) != null){
-                crew.add(new Crew(Course.FRONTEND, member));
+                crew.add(member);
             }
             bufferedReader.close();
         } catch (IOException e) {
@@ -26,15 +26,15 @@ public class FileInput {
         return crew;
     }
 
-    public List<Crew> makeBackendCrew() {
-        List<Crew> crew = new ArrayList<>();
+    public List<String> makeBackendCrew() {
+        List<String> crew = new ArrayList<>();
         try{
             File file = new File("/Users/macbookpro/Desktop/YS/우테코준비/java-pairmatching-precourse/src/main/resources/backend-crew.md");
             FileReader fileReaderBack = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReaderBack);
             String member = "";
             while(( member = bufferedReader.readLine()) != null){
-                crew.add(new Crew(Course.BACKEND, member));
+                crew.add(member);
             }
             bufferedReader.close();
         } catch (IOException e) {

@@ -1,32 +1,24 @@
 package pairmatching.model.function;
 
-import pairmatching.model.crew.Crew;
-import pairmatching.model.crew.FileInput;
-
-import java.util.List;
-
 public class Function {
-    List<Crew> frontendCrew;
-    List<Crew> backendCrew;
-    public void run(String functionNumber) {
+    public FunctionType makeFunctionType(String functionNumber) {
         if (functionNumber.equals("Q")) {
             // 종료
-            return;
+            return FunctionType.QUIT;
         }
-
-        FileInput fileInput = new FileInput();
         int selection = Integer.parseInt(functionNumber);
-        frontendCrew = fileInput.makeFrontCrew();
-        backendCrew = fileInput.makeBackendCrew();
-
         if (selection == 1) {
-            // 페어매칭`
+            // 페어 매칭
+            return FunctionType.FAIR_MATCHING;
         }
         if (selection == 2) {
             // 페어 조회
+            return FunctionType.SHOW_FAIR;
         }
         if (selection == 3) {
-            // 페어 초기
+            // 페어 초기화
+            return FunctionType.INIT_FAIR;
         }
+        throw new IllegalArgumentException("해당되지 않는 선택입니다.");
     }
 }
