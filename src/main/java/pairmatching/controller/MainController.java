@@ -62,10 +62,10 @@ public class MainController {
         while (true) {
             try {
                 String yesOrNo = inputView.askRetry();
-                if (yesOrNo == "네") {
+                if (yesOrNo.equals("네")) {
                     return true;
                 }
-                if (yesOrNo == "아니오") {
+                if (yesOrNo.equals("아니오")) {
                     return false;
                 }
                 throw new IllegalArgumentException("잘못된 입력입니다.");
