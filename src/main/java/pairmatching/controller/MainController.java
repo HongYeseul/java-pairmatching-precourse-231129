@@ -7,6 +7,7 @@ import pairmatching.model.function.FunctionType;
 import pairmatching.model.result.MatchingResult;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
+import pairmatching.view.Printer;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -36,15 +37,11 @@ public class MainController {
 
         while (!functionType.equals(FunctionType.QUIT)) {
             if (functionType.equals(FunctionType.FAIR_MATCHING)) {
-                String courseAndMission = inputView.askCourseAndMission();
-                matchingResult = FairMatching.run(courseAndMission, frontendCrew, backendCrew);
+                matchingResult = runFairMatching(frontendCrew, backendCrew);;
                 showMatchingTeam(matchingResult);
             }
             if (functionType.equals(FunctionType.SHOW_FAIR)) {
-                if (matchingResult == null) {
-                    throw new IllegalArgumentException("[ERROR] 매칭 이력이 없습니다.");
-                }
-                showMatchingTeam(matchingResult);
+                showHistory(matchingResult);
             }
             if (functionType.equals(FunctionType.INIT_FAIR)) {
                 matchingResult = null;
@@ -53,6 +50,31 @@ public class MainController {
             functionType = function.makeFunctionType(functionNumber);
         }
 
+    }
+
+    private MatchingResult runFairMatching(List<String> frontendCrew, List<String> backendCrew) {
+        while (true) {
+            try {
+                String courseAndMission = inputView.askCourseAndMission();
+                return FairMatching.run(courseAndMission, frontendCrew, backendCrew);
+            } catch (IllegalArgumentException e) {
+                Printer.printErrorMessage(e.getMessage());
+            }
+        }
+    }
+
+    private void showHistory(MatchingResult matchingResult) {
+        while (true) {
+            try {
+                if (matchingResult == null) {
+                    throw new IllegalArgumentException("[ERROR] 매칭 이력이 없습니다.");
+                }
+                showMatchingTeam(matchingResult);
+                break;
+            } catch (IllegalArgumentException e) {
+                Printer.printErrorMessage(e.getMessage());
+            }
+        }
     }
 
     private void showMatchingTeam(MatchingResult makedTeam) {

@@ -26,6 +26,6 @@ public enum Mission {
                 return mission;
             }
         }
-        throw new IllegalArgumentException("없는 미션 입니다.");
+        throw new IllegalArgumentException("[ERROR] 없는 미션 입니다.");
     }
 }
